@@ -1,0 +1,151 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-neon: var(--neon);
+  --color-neon-secondary: var(--neon-secondary);
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Deep midnight base */
+  --background: oklch(0.16 0.025 270);
+  --foreground: oklch(0.97 0.01 280);
+
+  --card: oklch(0.21 0.03 270);
+  --card-foreground: oklch(0.97 0.01 280);
+
+  --popover: oklch(0.19 0.03 270);
+  --popover-foreground: oklch(0.97 0.01 280);
+
+  /* Neon cyan-magenta */
+  --primary: oklch(0.78 0.19 195);
+  --primary-foreground: oklch(0.12 0.03 270);
+
+  --secondary: oklch(0.27 0.04 275);
+  --secondary-foreground: oklch(0.97 0.01 280);
+
+  --muted: oklch(0.24 0.03 275);
+  --muted-foreground: oklch(0.68 0.04 280);
+
+  --accent: oklch(0.72 0.22 330);
+  --accent-foreground: oklch(0.12 0.03 270);
+
+  --destructive: oklch(0.65 0.24 25);
+  --destructive-foreground: oklch(0.98 0.01 280);
+
+  --border: oklch(0.3 0.04 275 / 0.6);
+  --input: oklch(0.28 0.04 275);
+  --ring: oklch(0.78 0.19 195);
+
+  --neon: oklch(0.82 0.2 195);
+  --neon-secondary: oklch(0.72 0.24 330);
+
+  --gradient-neon: linear-gradient(135deg, oklch(0.78 0.19 195), oklch(0.72 0.22 330));
+  --gradient-aurora: radial-gradient(
+      ellipse at 20% 0%,
+      oklch(0.72 0.22 330 / 0.25),
+      transparent 50%
+    ),
+    radial-gradient(ellipse at 80% 100%, oklch(0.78 0.19 195 / 0.22), transparent 55%),
+    linear-gradient(180deg, oklch(0.14 0.03 270), oklch(0.18 0.03 275));
+
+  --shadow-neon: 0 0 24px oklch(0.78 0.19 195 / 0.55),
+    0 0 60px oklch(0.78 0.19 195 / 0.35);
+  --shadow-neon-pink: 0 0 24px oklch(0.72 0.24 330 / 0.55),
+    0 0 60px oklch(0.72 0.24 330 / 0.35);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    background: var(--gradient-aurora);
+    color: var(--color-foreground);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+}
+
+@utility glow-ring {
+  box-shadow: var(--shadow-neon);
+}
+
+@utility text-gradient-neon {
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-neon {
+  background-image: var(--gradient-neon);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px oklch(0.78 0.19 195 / 0.5),
+      0 0 50px oklch(0.78 0.19 195 / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 32px oklch(0.78 0.19 195 / 0.8),
+      0 0 80px oklch(0.72 0.22 330 / 0.5);
+  }
+}
+
+@keyframes grid-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-12px) scale(1.05); }
+}
+
+@utility animate-pulse-glow {
+  animation: pulse-glow 2.4s ease-in-out infinite;
+}
+@utility animate-grid-drift {
+  animation: grid-drift 6s linear infinite;
+}
+@utility animate-float-orb {
+  animation: float-orb 5s ease-in-out infinite;
+}
