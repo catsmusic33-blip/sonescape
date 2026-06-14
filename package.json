@@ -40,6 +40,7 @@
   "build": {
     "appId": "com.sonescape.visualizer",
     "productName": "Sonescape",
+    "afterPack": "build/afterPack.cjs",
     "files": [
       "main.js",
       "preload.cjs",
@@ -53,9 +54,9 @@
         { "target": "dmg", "arch": ["universal"] },
         { "target": "dir", "arch": ["universal"] }
       ],
-      "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.plist",
-      "hardenedRuntime": false
+      "extendInfo": {
+        "NSScreenCaptureUsageDescription": "Sonescape needs screen access to capture system audio for visualization."
+      }
     },
     "directories": {
       "output": "release"
