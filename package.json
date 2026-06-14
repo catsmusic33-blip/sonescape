@@ -51,8 +51,8 @@
       "category": "public.app-category.music",
       "identity": null,
       "target": [
-        { "target": "dmg", "arch": ["universal"] },
-        { "target": "dir", "arch": ["universal"] }
+        { "target": "dmg", "arch": ["arm64"] },
+        { "target": "dir", "arch": ["arm64"] }
       ],
       "extendInfo": {
         "NSScreenCaptureUsageDescription": "Sonescape needs screen access to capture system audio for visualization."
